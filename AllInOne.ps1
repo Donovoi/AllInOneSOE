@@ -1,5 +1,3 @@
-$ErrorActionPreference = 'Break'
-
 function Set-PowerCFG {
     [CmdletBinding()]
     param (
@@ -140,7 +138,7 @@ function Set-SOE {
 
         if ($PSVersionTable.PSVersion -lt '6.2') {
             Set-PSRepository -Name psgallery -InstallationPolicy Trusted
-            Install-PackageProvider -Name NuGet -Force -ErrorAction SilentlyContinue | Out-Null
+            Install-PackageProvider -Name NuGet -Force -ErrorAction SilentlyContinue -ForceBootstrap -Confirm:$false
         }
 
         Install-Module -Name WingetTools -Force

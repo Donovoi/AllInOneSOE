@@ -1,3 +1,5 @@
+$ErrorActionPreference = 'Break'
+
 function Set-PowerCFG {
     [CmdletBinding()]
     param (
@@ -135,7 +137,7 @@ function Set-SOE {
         cmd.exe /c "RD /S /Q %WinDir%\System32\GroupPolicyUsers && RD /S /Q %WinDir%\System32\GroupPolicy" -NoNewWindow -Wait
         gpupdate /force
         # Make sure we import all external modules needed
-        Install-Module -ModuleName WingetTools
+        Install-Module -Name WingetTools
         if ($psversiontable.psversion.Major -gt 5) {
             Install-Module -Name WindowsCompatibility -Force -Verbose
         }
@@ -180,7 +182,6 @@ function Set-SOE {
         # Make sure we have the latest Redistributables
         Write-Verbose 'Updating Redistributables'
         Update-VcRedist -Verbose
-        Set-GroupPolicy -Verbose
 
         Install-PackageManagers
 
@@ -198,7 +199,6 @@ function Set-SOE {
         Invoke-RestMethod script.sophi.app -UseBasicParsing | Invoke-Expression
         # Unblock all the things
         Write-Verbose 'Unblocking all the files everywhere'
-        Get-ChildItem -Path *.* -Recurse -Force | Unblock-File
         #Load the functions from the downloaded script
         Write-Verbose 'Loading functions from downloaded script'
         . '.\Sophia Script for *\Functions.ps1'

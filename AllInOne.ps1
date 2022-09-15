@@ -139,7 +139,6 @@ function Set-SOE {
         # Make sure we import all external modules needed
 
         if ($PSVersionTable.PSVersion -lt '6.2') {
-            Set-PSRepository -Name psgallery -InstallationPolicy Trusted
             Install-PackageProvider -Name NuGet -RequiredVersion 2.8.5.201 -Force
         }
 

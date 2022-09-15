@@ -128,7 +128,7 @@ function Set-SOE {
     )
 
     begin {
-        Start-AsAdmin -WindowsPowerShell
+        Start-AsAdmin
         Set-ExecutionPolicy -ExecutionPolicy Bypass -Force -Scope CurrentUser
 
         # Reset all group poilicies to system defaults

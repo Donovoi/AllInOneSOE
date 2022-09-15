@@ -138,9 +138,8 @@ function Set-SOE {
         gpupdate /force
         # Make sure we import all external modules needed
 
-        if ($PSVersionTable.PSVersion -lt '6.2') {
-            Install-PackageProvider -Name NuGet -RequiredVersion 2.8.5.201 -Force
-        }
+        Set-PSRepository -InstallationPolicy Trusted -Name PSGallery 
+        Install-PackageProvider -Name NuGet -RequiredVersion 2.8.5.201 -Force -Scope CurrentUser
 
         Install-Module -Name WingetTools -Force
         if ($psversiontable.psversion.Major -gt 5) {

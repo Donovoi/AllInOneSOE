@@ -60,10 +60,7 @@ function Install-ChocoBox {
         
     )        
 
-    # Making sure Boxstarter can find chocolatey
-    if (-not (Test-Path -Path "C:\ProgramData\Chocolatey")) {
-        New-Item -Path "C:\ProgramData\Chocolatey" -Force
-    }
+    
     $ENV:ChocolateyInstall = "C:\ProgramData\Chocolatey\"
 
     # Install boxstarter to handle reboots
